@@ -4,7 +4,7 @@ const sleep = promisify(setTimeout);
 
 module.exports = {
   name: 'outro',
-  description: 'Plays outro audio and kicks the mentioned user.',
+  description: 'Plays outro audio and kicks the mentioned user',
   async execute(message) {
     // Check if the command is in a guild and if a user is mentioned
     if (!message.guild || !message.mentions.users.size) {
