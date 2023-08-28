@@ -27,6 +27,12 @@ client.on("messageCreate", async (message) => {
   messageCreate(message);
 });
 
+const voiceTracker = require("./events/voiceTracker");
+
+client.on("voiceStateUpdate", async (oldState, newState) => {
+  voiceTracker(oldState, newState);
+});
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
