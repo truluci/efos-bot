@@ -1,47 +1,43 @@
-const { joinVoiceChannel, createAudioResource, NoSubscriberBehavior, AudioPlayerStatus } = require('@discordjs/voice');
-const { promisify } = require('util');
-const sleep = promisify(setTimeout);
+const { createAudioPlayer, joinVoiceChannel, createAudioResource, NoSubscriberBehavior } = require('@discordjs/voice');
+const path = require('path');
+const sleep = require('util').promisify(setTimeout);
 
 module.exports = {
   name: 'outro',
   description: 'Plays outro audio and kicks the mentioned user',
   async execute(message) {
-    // Check if the command is in a guild and if a user is mentioned
     if (!message.guild || !message.mentions.users.size) {
       return message.reply('Please mention a user to use this command.');
     }
 
     const targetUser = message.mentions.users.first();
 
-    // Check if the mentioned user is in a voice channel
     const member = message.guild.members.cache.get(targetUser.id);
     if (!member.voice.channel) {
       return message.reply('adam sesli kanalda değil ki neden çıkartıyorsun :(');
-    }
+    };
 
-    // Join the user's voice channel
     const voiceChannel = member.voice.channel;
+
     const connection = joinVoiceChannel({
       channelId: voiceChannel.id,
       guildId: voiceChannel.guild.id,
       adapterCreator: voiceChannel.guild.voiceAdapterCreator,
     });
 
-    // Create an audio resource and player
-    const audioResource = createAudioResource('./outro.mp3', {
-      inlineVolume: true,
-      behaviors: { noSubscriber: NoSubscriberBehavior.Pause },
-    });
+    const resource = createAudioResource(path.join(__dirname, '../assets/outro.mp3'));
 
-    const audioPlayer = connection.subscribe(audioResource);
+    const player = createAudioPlayer();
 
-    // Play audio for 20 seconds
-    await sleep(15000); // Wait 15 seconds
-    member.voice.kick(); // Kick the user
-    await sleep(5000); // Wait 5 seconds
+    connection.subscribe(player);
 
-    // Stop the audio and leave the voice channel
-    audioPlayer.stop();
+    player.play(resource);
+
+    // await sleep(15000);
+    // member.voice.disconnect();
+    await sleep(5000);
+
+    player.stop();
     connection.destroy();
   },
 };

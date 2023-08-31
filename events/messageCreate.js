@@ -16,13 +16,9 @@ module.exports = async (message) => {
 
   const content = message.content.toLowerCase();
   
-  // Check if the content matches any keywords
-  for (const keyword in keywordResponses) {
-    if (content.includes(keyword)) {
-      message.reply(keywordResponses[keyword]);
-      break;
-    }
-  }
+  if (content in keywordResponses) {
+    message.reply(keywordResponses[content]);
+  };
 
   if (content.startsWith(commandPrefix)) {
     const args = content.slice(commandPrefix.length).trim().split(/ +/);
@@ -31,8 +27,8 @@ module.exports = async (message) => {
     if (commandName === 'outro') {
       const outroCommand = require(`../commands/outro`);
       outroCommand.execute(message);
-    }
-  }
+    };
+  };
 
   console.log(message.content);
 };
