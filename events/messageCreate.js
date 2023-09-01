@@ -1,34 +1,13 @@
-const client = require("../client");
-
-const keywordResponses = {
-  "ping": "pong",
-  "zort": "zarrrrt",
-  "selam": "selamın aleyküm",
-  "sa": "as",
-  // Add more keywords and responses here
-};
-
-const commandPrefix = "."; // Change this to your command prefix
+const keywordResponse = require('../commands/keywordResponse');
+const outro = require('../commands/outro');
 
 module.exports = async (message) => {
   if (!message.guild) return;
-  if (message.author.bot) return;
 
-  const content = message.content.toLowerCase();
+  const content = message.content.trim().toLowerCase();
+
+  keywordResponse(message, content);
   
-  if (content in keywordResponses) {
-    message.reply(keywordResponses[content]);
-  };
-
-  if (content.startsWith(commandPrefix)) {
-    const args = content.slice(commandPrefix.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
-
-    if (commandName === 'outro') {
-      const outroCommand = require(`../commands/outro`);
-      outroCommand.execute(message);
-    };
-  };
-
-  console.log(message.content);
+  if (content.split(' ')[0] == 'outro')
+    outro(message);
 };

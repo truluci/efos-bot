@@ -1,42 +1,43 @@
-const { Client, GatewayIntentBits, Partials } = require("discord.js");
+const Discord = require("discord.js");
 const dotenv = require("dotenv");
+
+const messageCreate = require("./events/messageCreate");
+const ready = require("./events/ready");
+const voiceStateUpdate = require("./events/voiceStateUpdate");
 
 dotenv.config();
 
-const client = new Client({
+const client = new Discord.Client({
   intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.MessageContent
+    Discord.GatewayIntentBits.Guilds,
+    Discord.GatewayIntentBits.GuildMessages,
+    Discord.GatewayIntentBits.GuildMembers,
+    Discord.GatewayIntentBits.GuildPresences,
+    Discord.GatewayIntentBits.GuildMessageReactions,
+    Discord.GatewayIntentBits.GuildVoiceStates,
+    Discord.GatewayIntentBits.DirectMessages,
+    Discord.GatewayIntentBits.MessageContent
   ],
   partials: [
-    Partials.Channel,
-    Partials.Message,
-    Partials.User,
-    Partials.GuildMember,
-    Partials.Reaction
+    Discord.Partials.Channel,
+    Discord.Partials.Message,
+    Discord.Partials.User,
+    Discord.Partials.GuildMember,
+    Discord.Partials.Reaction
   ]
 });
 
-const messageCreate = require("./events/messageCreate");
+client.on("messageCreate", async (message) =>
+  messageCreate(message)
+);
 
-client.on("messageCreate", async (message) => {
-  messageCreate(message);
-});
+client.on("voiceStateUpdate", async (oldState, newState) =>
+  voiceStateUpdate(oldState, newState)
+);
 
-const voiceTracker = require("./events/voiceTracker");
-
-client.on("voiceStateUpdate", async (oldState, newState) => {
-  voiceTracker(oldState, newState);
-});
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
+client.on('ready', () =>
+  ready(client)
+);
 
 client.login(process.env.TOKEN)
 
