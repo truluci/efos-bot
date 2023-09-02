@@ -1,3 +1,4 @@
+const changeBotsAvatarMenu = require('../commands/changeBotsAvatarMenu');
 const keywordResponse = require('../commands/keywordResponse');
 const outro = require('../commands/outro');
 const weather = require('../commands/weatherMenu');
@@ -16,4 +17,7 @@ module.exports = async (message) => {
 
   if (command == 'hava')
     weather(message);
+
+  if (command == 'avatar')
+    changeBotsAvatarMenu(message);
 };
