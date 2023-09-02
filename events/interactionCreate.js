@@ -4,6 +4,6 @@ module.exports = async (interaction) => {
   if (!interaction.isStringSelectMenu())
     return;
 
-  if (interaction.customId === 'weather')
+  if (interaction.customId == 'weather')
     weather(interaction);
 };
