@@ -1,5 +1,6 @@
 const keywordResponse = require('../commands/keywordResponse');
 const outro = require('../commands/outro');
+const weather = require('../commands/weatherMenu');
 
 module.exports = async (message) => {
   if (!message.guild) return;
@@ -7,7 +8,12 @@ module.exports = async (message) => {
   const content = message.content.trim().toLowerCase();
 
   keywordResponse(message, content);
+
+  const command = content.split(' ')[0];
   
-  if (content.split(' ')[0] == 'outro')
+  if (command == 'outro')
     outro(message);
+
+  if (command == 'hava')
+    weather(message);
 };

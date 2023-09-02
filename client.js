@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 
+const interactionCreate = require("./events/interactionCreate");
 const messageCreate = require("./events/messageCreate");
 const ready = require("./events/ready");
 const voiceStateUpdate = require("./events/voiceStateUpdate");
@@ -27,16 +28,20 @@ const client = new Discord.Client({
   ]
 });
 
+client.on('interactionCreate', interaction =>
+  interactionCreate(interaction)
+);
+
 client.on("messageCreate", async (message) =>
   messageCreate(message)
 );
 
-client.on("voiceStateUpdate", async (oldState, newState) =>
-  voiceStateUpdate(oldState, newState)
-);
-
 client.on('ready', () =>
   ready(client)
+);
+
+client.on("voiceStateUpdate", async (oldState, newState) =>
+  voiceStateUpdate(oldState, newState)
 );
 
 client.login(process.env.TOKEN)
