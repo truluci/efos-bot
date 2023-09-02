@@ -13,10 +13,10 @@ module.exports = async (oldState, newState) => {
 
     if (joinTime) {
       const channel = oldState.channel;
-      const seconds = Math.floor((Date.now() - joinTime) / 1000);
+      const duration = new Date(Date.now() - joinTime);
 
       await channel.send({
-        content: `${durationsOfEachMember[member.id]?.channel.name} kanalında ${seconds} saniye kalan ${member.nickname} arkadaşımızı tebrik ediyoruz.`,
+        content: `${durationsOfEachMember[member.id]?.channel.name} kanalında ${duration.getUTCHours()} saat ${duration.getUTCMinutes()} dakika ${duration.getUTCSeconds()} saniye kadar kalan ${member.nickname} arkadaşımızı tebrik ediyoruz.`,
         flags: [4096] // Silent message
       });
 
