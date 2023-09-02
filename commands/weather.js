@@ -1,10 +1,12 @@
 const fetch = require('node-fetch');
 
 module.exports = async (interaction) => {
+  const selectedValue = interaction.values[0];
+
   const params = new URLSearchParams({
     appid: process.env.WEATHER_API_KEY,
     lang: 'tr',
-    q: interaction.values[0],
+    q: selectedValue,
     units: 'metric',
   });
   
