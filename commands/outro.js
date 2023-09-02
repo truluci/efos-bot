@@ -4,14 +4,14 @@ const sleep = require('util').promisify(setTimeout);
 
 module.exports = async (message) => {
   if (!message.mentions.users.size) {
-    message.reply('Please mention a user to use this command properly.');
+    message.reply('birisini etiketle amk düzgün kullan.');
     return;
   }
 
   const member = message.guild.members.cache.get(message.mentions.users.first()?.id);
 
   if (!member || !member.voice.channel) {
-    message.reply('The mentioned user is not in a voice channel or could not be found.');
+    message.reply('kanalda yok ki amk düzgün kullan.');
     return;
   }
 
