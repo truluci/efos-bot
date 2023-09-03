@@ -1,6 +1,6 @@
 const isSetAvatarAllowed = require('../commands/avatar/isSetAvatarAllowed');
 const createCityMenu = require('../commands/weather/createCityMenu');
-const repondToKeywords = require('../commands/auto/repondToKeywords');
+const respondToKeywords = require('../commands/auto/respondToKeywords');
 const startOutro = require('../commands/outro/startOutro');
 
 module.exports = async (message) => {
@@ -9,7 +9,7 @@ module.exports = async (message) => {
   const content = message.content.trim().toLowerCase();
   const command = content.split(' ')[0];
 
-  repondToKeywords(message, content);
+  respondToKeywords(message, content);
   
   if (command == 'outro')
     startOutro(message);
