@@ -1,13 +1,13 @@
-const changeBotsAvatar = require('../commands/changeBotsAvatar');
-const weather = require('../commands/weather');
+const setAvatar = require('../commands/avatar/setAvatar');
+const sendWeatherByCity = require('../commands/weather/sendWeatherByCity');
 
 module.exports = async (interaction) => {
   if (!interaction.isStringSelectMenu() && !interaction.isButton())
     return;
 
   if (interaction.customId == 'weather') {
-    weather(interaction);
+    sendWeatherByCity(interaction);
   } else if (interaction.customId == 'confirm-avatar-change' || interaction.customId == 'reject-avatar-change') {
-    changeBotsAvatar(interaction);
+    setAvatar(interaction);
   };
 };

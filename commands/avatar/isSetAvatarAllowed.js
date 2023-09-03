@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const changeBotsAvatar = require('./changeBotsAvatar');
+const setAvatar = require('./setAvatar');
 
 module.exports = async (message) => {
   if (!message.guild) return;
@@ -9,7 +9,7 @@ module.exports = async (message) => {
   const member = message.guild.members.cache.get(message.author.id);
 
   if (member && member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-    changeBotsAvatar(message);
+    setAvatar(message);
   } else {
     message.reply({
       content: 'admin değilsin böhöhöyt, adminler izin veriyonuz mu?',

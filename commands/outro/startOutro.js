@@ -1,5 +1,4 @@
 const DiscordVoice = require('@discordjs/voice');
-const sleep = require('util').promisify(setTimeout);
 const path = require('path');
 
 module.exports = async (message) => {
@@ -31,10 +30,12 @@ module.exports = async (message) => {
 
   player.play(resource);
 
-  await sleep(15000);
-  member.voice.disconnect();
-  await sleep(5000);
+  setTimeout(() => {
+    member.voice.disconnect();
+  }, 15000);
 
-  player.stop();
-  connection.destroy();
+  setTimeout(() => {
+    player.stop();
+    connection.destroy();
+  }, 20000);
 };

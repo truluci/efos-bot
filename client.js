@@ -1,10 +1,10 @@
-const Discord = require("discord.js");
-const dotenv = require("dotenv");
+const Discord = require('discord.js');
+const dotenv = require('dotenv');
 
-const interactionCreate = require("./events/interactionCreate");
-const messageCreate = require("./events/messageCreate");
-const ready = require("./events/ready");
-const voiceStateUpdate = require("./events/voiceStateUpdate");
+const interactionCreate = require('./events/interactionCreate');
+const messageCreate = require('./events/messageCreate');
+const ready = require('./events/ready');
+const voiceStateUpdate = require('./events/voiceStateUpdate');
 
 dotenv.config();
 
@@ -32,7 +32,7 @@ client.on('interactionCreate', interaction =>
   interactionCreate(interaction)
 );
 
-client.on("messageCreate", async (message) =>
+client.on('messageCreate', (message) =>
   messageCreate(message)
 );
 
@@ -40,7 +40,7 @@ client.on('ready', () =>
   ready(client)
 );
 
-client.on("voiceStateUpdate", async (oldState, newState) =>
+client.on('voiceStateUpdate', (oldState, newState) =>
   voiceStateUpdate(oldState, newState)
 );
 

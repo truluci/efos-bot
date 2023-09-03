@@ -1,23 +1,20 @@
-const changeBotsAvatarMenu = require('../commands/changeBotsAvatarMenu');
-const keywordResponse = require('../commands/keywordResponse');
-const outro = require('../commands/outro');
-const weather = require('../commands/weatherMenu');
+const isSetAvatarAllowed = require('../commands/avatar/isSetAvatarAllowed');
+const createCityMenu = require('../commands/weather/createCityMenu');
+const repondToKeywords = require('../commands/auto/repondToKeywords');
+const startOutro = require('../commands/outro/startOutro');
 
 module.exports = async (message) => {
   if (!message.guild) return;
 
   const content = message.content.trim().toLowerCase();
-
-  keywordResponse(message, content);
-
   const command = content.split(' ')[0];
+
+  repondToKeywords(message, content);
   
   if (command == 'outro')
-    outro(message);
-
-  if (command == 'hava')
-    weather(message);
-
-  if (command == 'avatar')
-    changeBotsAvatarMenu(message);
+    startOutro(message);
+  else if (command == 'hava')
+    createCityMenu(message);
+  else if (command == 'avatar')
+    isSetAvatarAllowed(message);
 };

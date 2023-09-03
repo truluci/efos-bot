@@ -1,9 +1,8 @@
-const durationsOfEachMember = {};
-const durationLog = require('../commands/durationLog');
+const logDurations = require('../commands/auto/logDurations');
 
 module.exports = async (oldState, newState) => {
   const member = newState.member;
 
   if (member)
-    durationLog(oldState, newState);
+    logDurations(oldState, newState);
 };
