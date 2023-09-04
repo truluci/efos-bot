@@ -31,7 +31,8 @@ module.exports = async (message) => {
   player.play(resource);
 
   setTimeout(() => {
-    member.voice.disconnect();
+    if (member.voice.channel && member.voice.channel.members.has(message.client.user.id))
+      member.voice.disconnect();
   }, 15000);
 
   setTimeout(() => {

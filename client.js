@@ -32,11 +32,11 @@ client.on('interactionCreate', interaction =>
   interactionCreate(interaction)
 );
 
-client.on('messageCreate', (message) =>
+client.on('messageCreate', message =>
   messageCreate(message)
 );
 
-client.on('ready', () =>
+client.on('ready', _ =>
   ready(client)
 );
 
