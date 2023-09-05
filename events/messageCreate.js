@@ -5,6 +5,20 @@ const startOutro = require('../commands/outro/startOutro');
 const translateToEnglish = require('../commands/auto/translateToEnglish');
 
 const CHANNELS_TO_TRANSLATE = process.env.CHANNELS_TO_TRANSLATE.split(',');
+const COMMAND_TRIGGERS = {
+  avatar: [
+    'avatar',
+    'pp'
+  ],
+  weather: [
+    'weather',
+    'hava'
+  ],
+  outro: [
+    'outro',
+    'çıkış'
+  ]
+};
 
 module.exports = message => {
   if (!message.guild) return;
@@ -17,10 +31,10 @@ module.exports = message => {
   else
     respondToKeywords(message);
   
-  if (command == 'outro')
+  if (COMMAND_TRIGGERS.outro.includes(command))
     startOutro(message);
-  else if (command == 'hava')
+  else if (COMMAND_TRIGGERS.weather.includes(command))
     createCityMenu(message);
-  else if (command == 'avatar')
+  else if (COMMAND_TRIGGERS.avatar.includes(command))
     isSetAvatarAllowed(message);
 };

@@ -1,8 +1,6 @@
 const logDurations = require('../commands/auto/logDurations');
 
 module.exports = (oldState, newState) => {
-  const member = newState.member;
-
-  if (member)
+  if (newState.member)
     logDurations(oldState, newState);
 };

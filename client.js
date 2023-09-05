@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+const guildMemberAdd = require('./events/guildMemberAdd');
 const interactionCreate = require('./events/interactionCreate');
 const messageCreate = require('./events/messageCreate');
 const ready = require('./events/ready');
@@ -27,6 +28,10 @@ const client = new Discord.Client({
     Discord.Partials.Reaction
   ]
 });
+
+client.on('guildMemberAdd', member =>
+  guildMemberAdd(member)
+);
 
 client.on('interactionCreate', interaction =>
   interactionCreate(interaction)
