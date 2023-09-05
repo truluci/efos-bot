@@ -29,25 +29,15 @@ const client = new Discord.Client({
   ]
 });
 
-client.on('guildMemberAdd', member =>
-  guildMemberAdd(member)
-);
+client.on('guildMemberAdd', guildMemberAdd);
 
-client.on('interactionCreate', interaction =>
-  interactionCreate(interaction)
-);
+client.on('interactionCreate', interactionCreate);
 
-client.on('messageCreate', message =>
-  messageCreate(message)
-);
+client.on('messageCreate', messageCreate);
 
-client.on('ready', _ =>
-  ready(client)
-);
+client.on('ready', ready);
 
-client.on('voiceStateUpdate', (oldState, newState) =>
-  voiceStateUpdate(oldState, newState)
-);
+client.on('voiceStateUpdate', voiceStateUpdate);
 
 client.login(process.env.TOKEN)
 

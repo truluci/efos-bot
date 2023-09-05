@@ -1,55 +1,29 @@
-const Discord = require('discord.js');
 const validUrl = require('valid-url');
 
-let content;
+module.exports = (event, messageId) => {
+  if (event.customId)
+    event = event.message;
 
-module.exports = async event => {
-  if (!event.customId) {
-    content = event.content.trim().toLowerCase().split(' ');
-  } else {
-    content = (await event.message.channel.messages.fetch(event.message.reference.messageId)).content.trim().toLowerCase().split(' ');
-  };
+  event.channel.messages.fetch(messageId).then(message => {
+    const content = message.content.split(' ');
 
-  if (content.length != 2) {
-    event.reply('avatar değiştirmek için bir tane link girmen lazım düzgün kullan');
-    return;
-  };
-
-  if (!validUrl.isUri(content[1])) {
-    event.reply('doğru link gir düzgün kullan');
-    return;
-  };
-
-  if (event.customId == 'confirm-avatar-change') {
-    const member = event.guild.members.cache.get(event.user.id);
-    const messageWithUrl = await event.message.channel.messages.fetch(event.message.reference.messageId);
-
-    if (member && member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-      messageWithUrl.client.user.setAvatar(messageWithUrl.content.split(' ')[1]);
-      messageWithUrl.reply('yaptım reis, gifse olmamıştır ama');
-      event.message.delete();
-    } else {
-      event.reply({
-        content: 'admin değilsin böhöhöyt',
-        ephemeral: true
-      });
+    if (content.length != 2) {
+      event.reply('avatar değiştirmek için bir tane link girmen lazım düzgün kullan');
+      return;
     };
-  } else if (event.customId == 'reject-avatar-change') {
-    const member = event.guild.members.cache.get(event.user.id);
 
-    if (member && member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-      const messageWithUrl = await event.message.channel.messages.fetch(event.message.reference.messageId);
-
-      messageWithUrl.reply('emir yüksek yerlerden geldi, yapamam');
-      event.message.delete();
-    } else {
-      event.reply({
-        content: 'admin değilsin böhöhöyt',
-        ephemeral: true
-      });
+    if (!validUrl.isUri(content[1])) {
+      event.reply('doğru link gir düzgün kullan');
+      return;
     };
-  } else {
-    event.client.user.setAvatar(content[1]);
-    event.reply('yaptım reis, gifse olmamıştır ama');
-  };
+
+    message.client.user.setAvatar(content[1]).then(() => {
+      message.reply('yaptım reis, gifse olmamıştır ama').then(() => {
+        event.delete();
+      });
+    }).catch(err => {
+      console.error(err);
+      message.reply('bi sıkıntı çıktı kanzi: ' + err);
+    });
+  });
 };

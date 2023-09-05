@@ -1,6 +1,9 @@
-const isSetAvatarAllowed = require('../commands/avatar/isSetAvatarAllowed');
+const isAdmin = require('../utils/isAdmin');
+
+const createSetAvatarMenu = require('../commands/avatar/createSetAvatarMenu');
 const createCityMenu = require('../commands/weather/createCityMenu');
 const respondToKeywords = require('../commands/auto/respondToKeywords');
+const setAvatar = require('../commands/avatar/setAvatar');
 const startOutro = require('../commands/outro/startOutro');
 const translateToEnglish = require('../commands/auto/translateToEnglish');
 
@@ -24,7 +27,7 @@ module.exports = message => {
   if (!message.guild) return;
   if (message.author.bot) return;
 
-  const command = message.content.trim().toLowerCase().split(' ')[0];
+  const command = message.content.toLowerCase().split(' ')[0];
 
   if (CHANNELS_TO_TRANSLATE.includes(message.channel.id))
     translateToEnglish(message);
@@ -36,5 +39,8 @@ module.exports = message => {
   else if (COMMAND_TRIGGERS.weather.includes(command))
     createCityMenu(message);
   else if (COMMAND_TRIGGERS.avatar.includes(command))
-    isSetAvatarAllowed(message);
+    if (isAdmin(message.member))
+      setAvatar(message, message.id);
+    else
+      createSetAvatarMenu(message);
 };

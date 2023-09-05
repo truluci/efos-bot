@@ -4,6 +4,7 @@ const validUrl = require('valid-url');
 
 module.exports = message => {
   if (validUrl.isUri(message.content)) return;
+  if (!message.content.length) return;
 
   translate(message.content, { from: 'tr', to: 'en' }).then(res => {
     const embed = new Discord.EmbedBuilder()
@@ -12,7 +13,7 @@ module.exports = message => {
         iconURL: message.author.avatarURL()
       })
       .setDescription(res.text);
-    
+
     if (message.reference) {
       const repliedMessage = message.channel.messages.cache.get(message.reference.messageId);
 
@@ -28,10 +29,10 @@ module.exports = message => {
       flags: [4096] // Silent message
     });
   }).catch(err => {
+    console.error(err);
     message.channel.send({
       content: `bi sıkıntı çıktı kanzi: ${err}`,
       flags: [4096] // Silent message
     });
-    console.error(err);
   });
 };
