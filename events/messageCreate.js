@@ -13,7 +13,7 @@ module.exports = async (message) => {
 
   respondToKeywords(message, content);
 
-  if (message.channel.id == '1046874392254218320')
+  if (message.channel.id == '1046874392254218320' || message.channel.id == '1064539723172950117')
     translateToEnglish(message);
   
   if (command == 'outro')
