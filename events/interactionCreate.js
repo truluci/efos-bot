@@ -12,10 +12,10 @@ module.exports = interaction => {
     sendWeatherByCity(interaction);
   } else if (interaction.customId == 'confirm-avatar-change') {
     if (isAdmin(interaction.member))
-      setAvatar(interaction, interaction.message.reference.messageId);
+      setAvatar(interaction.message.channel.messages.cache.get(interaction.message.reference.messageId), interaction);      
     else
       rejectAvatarChange(interaction);
   } else if (interaction.customId == 'reject-avatar-change') {
     rejectAvatarChange(interaction);
-  }
+  };
 };

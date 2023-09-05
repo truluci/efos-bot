@@ -34,13 +34,14 @@ module.exports = message => {
   else
     respondToKeywords(message);
   
-  if (COMMAND_TRIGGERS.outro.includes(command))
+  if (COMMAND_TRIGGERS.outro.includes(command)) {
     startOutro(message);
-  else if (COMMAND_TRIGGERS.weather.includes(command))
+  } else if (COMMAND_TRIGGERS.weather.includes(command)) {
     createCityMenu(message);
-  else if (COMMAND_TRIGGERS.avatar.includes(command))
+  } else if (COMMAND_TRIGGERS.avatar.includes(command)) {
     if (isAdmin(message.member))
-      setAvatar(message, message.id);
+      setAvatar(message);
     else
       createSetAvatarMenu(message);
+  };
 };
