@@ -12,7 +12,11 @@ const CITIES_AND_DESCRIPTIONS = {
   'Istanbul': {
     description: 'burasi shitty biraz (alizade)',
     value: 'Istanbul'
-  }
+  },
+  'Antalya': {
+    description: 'efso sehir',
+    value: 'Antalya'
+  },
 };
 
 module.exports = message => {
