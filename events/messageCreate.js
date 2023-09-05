@@ -4,17 +4,18 @@ const respondToKeywords = require('../commands/auto/respondToKeywords');
 const startOutro = require('../commands/outro/startOutro');
 const translateToEnglish = require('../commands/auto/translateToEnglish');
 
-module.exports = async (message) => {
+const CHANNELS_TO_TRANSLATE = process.env.CHANNELS_TO_TRANSLATE.split(',');
+
+module.exports = message => {
   if (!message.guild) return;
   if (message.author.bot) return;
 
-  const content = message.content.trim().toLowerCase();
-  const command = content.split(' ')[0];
+  const command = message.content.trim().toLowerCase().split(' ')[0];
 
-  respondToKeywords(message, content);
-
-  if (message.channel.id == '1046874392254218320' || message.channel.id == '1064539723172950117')
+  if (CHANNELS_TO_TRANSLATE.includes(message.channel.id))
     translateToEnglish(message);
+  else
+    respondToKeywords(message);
   
   if (command == 'outro')
     startOutro(message);

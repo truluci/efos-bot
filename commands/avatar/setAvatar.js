@@ -3,7 +3,7 @@ const validUrl = require('valid-url');
 
 let content;
 
-module.exports = async (event) => {
+module.exports = async event => {
   if (!event.customId) {
     content = event.content.trim().toLowerCase().split(' ');
   } else {

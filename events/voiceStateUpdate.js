@@ -1,6 +1,6 @@
 const logDurations = require('../commands/auto/logDurations');
 
-module.exports = async (oldState, newState) => {
+module.exports = (oldState, newState) => {
   const member = newState.member;
 
   if (member)

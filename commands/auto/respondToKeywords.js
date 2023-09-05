@@ -5,7 +5,9 @@ const KEYWORD_RESPONSES = {
   'sa': 'as',
 };
 
-module.exports = (message, content) => {
+module.exports = message => {
+  const content = message.content.toLowerCase();
+
   if (content in KEYWORD_RESPONSES)
     message.reply(KEYWORD_RESPONSES[content]);
 };

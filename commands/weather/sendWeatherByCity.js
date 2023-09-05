@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-module.exports = async (interaction) => {
+module.exports = interaction => {
   const selectedValue = interaction.values[0];
 
   const params = new URLSearchParams({

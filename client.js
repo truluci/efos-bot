@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const dotenv = require('dotenv');
 
+dotenv.config();
+
 const interactionCreate = require('./events/interactionCreate');
 const messageCreate = require('./events/messageCreate');
 const ready = require('./events/ready');
 const voiceStateUpdate = require('./events/voiceStateUpdate');
-
-dotenv.config();
 
 const client = new Discord.Client({
   intents: [

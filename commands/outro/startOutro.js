@@ -1,7 +1,7 @@
 const DiscordVoice = require('@discordjs/voice');
 const path = require('path');
 
-module.exports = async (message) => {
+module.exports = message => {
   if (!message.mentions.users.size) {
     message.reply('birisini etiketle amk düzgün kullan.');
     return;

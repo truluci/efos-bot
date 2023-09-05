@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 const setAvatar = require('./setAvatar');
 
-module.exports = async (message) => {
+module.exports = message => {
   if (!message.guild) return;
   if (message.author.bot) return;
 

@@ -15,7 +15,7 @@ const CITIES_AND_DESCRIPTIONS = {
   }
 };
 
-module.exports = async (message) => {
+module.exports = message => {
   const options = Object.keys(CITIES_AND_DESCRIPTIONS).map(city => {
     return new Discord.StringSelectMenuOptionBuilder()
       .setLabel(city)
@@ -23,7 +23,7 @@ module.exports = async (message) => {
       .setValue(CITIES_AND_DESCRIPTIONS[city].value);
   });
 
-  await message.reply({
+  message.reply({
     content: 'neresi kanka?',
     components: [
       new Discord.ActionRowBuilder()

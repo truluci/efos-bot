@@ -1,7 +1,7 @@
 const setAvatar = require('../commands/avatar/setAvatar');
 const sendWeatherByCity = require('../commands/weather/sendWeatherByCity');
 
-module.exports = async (interaction) => {
+module.exports = interaction => {
   if (!interaction.isStringSelectMenu() && !interaction.isButton())
     return;
 
