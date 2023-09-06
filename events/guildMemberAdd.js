@@ -1,5 +1,5 @@
-const sendGreetingMessage = require('../commands/greet/sendGreetingMessage');
+const greet = require('../commands/greet');
 
 module.exports = member => {
-  sendGreetingMessage(member);
+  greet.execute(member);
 };

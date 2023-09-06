@@ -1,27 +1,9 @@
-const isAdmin = require('../utils/isAdmin');
-
-const createSetAvatarMenu = require('../commands/avatar/createSetAvatarMenu');
-const createCityMenu = require('../commands/weather/createCityMenu');
-const respondToKeywords = require('../commands/auto/respondToKeywords');
-const setAvatar = require('../commands/avatar/setAvatar');
-const startOutro = require('../commands/outro/startOutro');
-const translateToEnglish = require('../commands/auto/translateToEnglish');
-
-const CHANNELS_TO_TRANSLATE = process.env.CHANNELS_TO_TRANSLATE.split(',');
-const COMMAND_TRIGGERS = {
-  avatar: [
-    'avatar',
-    'pp'
-  ],
-  weather: [
-    'weather',
-    'hava'
-  ],
-  outro: [
-    'outro',
-    'çıkış'
-  ]
-};
+const avatar = require('../commands/avatar');
+const help = require('../commands/help');
+const keyword = require('../commands/keyword');
+const outro = require('../commands/outro');
+const translate = require('../commands/translate');
+const weather = require('../commands/weather');
 
 module.exports = message => {
   if (!message.guild) return;
@@ -29,19 +11,16 @@ module.exports = message => {
 
   const command = message.content.toLowerCase().split(' ')[0];
 
-  if (CHANNELS_TO_TRANSLATE.includes(message.channel.id))
-    translateToEnglish(message);
-  else
-    respondToKeywords(message);
+  keyword.execute(message);
+  translate.execute(message);
   
-  if (COMMAND_TRIGGERS.outro.includes(command)) {
-    startOutro(message);
-  } else if (COMMAND_TRIGGERS.weather.includes(command)) {
-    createCityMenu(message);
-  } else if (COMMAND_TRIGGERS.avatar.includes(command)) {
-    if (isAdmin(message.member))
-      setAvatar(message);
-    else
-      createSetAvatarMenu(message);
+  if (outro.triggers.includes(command)) {
+    outro.execute(message);
+  } else if (weather.triggers.includes(command)) {
+    weather.execute(message);
+  } else if (avatar.triggers.includes(command)) {
+    avatar.execute(message);
+  } else if (help.triggers.includes(command)) {
+    help.execute(message);
   };
 };

@@ -1,4 +1,4 @@
-const isAdmin = require('../../utils/isAdmin');
+const isAdmin = require('../utils/isAdmin');
 
 module.exports = interaction => {
   if (isAdmin(interaction.member)) {
