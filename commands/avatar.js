@@ -41,7 +41,7 @@ module.exports = {
 
     if (!validUrl.isUri(content[1])) {
       message.reply('doğru link gir düzgün kullan');
-      interaction.message.delete();
+      interaction?.message.delete();
       return;
     };
 
@@ -50,12 +50,12 @@ module.exports = {
         message.delete();
       });
 
-      interaction.message.delete();
+      interaction?.message.delete();
     }).catch(err => {
       console.error(err);
       message.reply('bi sıkıntı çıktı kanzi: ' + err);
 
-      interaction.message.delete();
+      interaction?.message.delete();
     });
   },
   handleInteraction(interaction) {
