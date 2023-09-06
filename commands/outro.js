@@ -7,6 +7,11 @@ module.exports = {
   detailedDescription: 'Plays outro for a specified user.\n\n`outro <@user>`\n\nUser must be in a voice channel for this command to work properly.',
   triggers: ['outro', 'çıkış'],
   execute(message) {
+    if (message.client.voice.connections.size) {
+      message.reply('İŞİM VAR BAŞKASINI ATIYOM DUR BİRAZ');
+      return;
+    };
+
     if (!message.mentions.users.size) {
       message.reply('birisini etiketle amk düzgün kullan.');
       return;
@@ -16,6 +21,11 @@ module.exports = {
 
     if (!member || !member.voice.channel) {
       message.reply('kanalda yok ki amk düzgün kullan.');
+      return;
+    };
+
+    if (member.id == message.client.user.id) {
+      message.reply('beni mi çıkarıyorsun amk?');
       return;
     };
 
