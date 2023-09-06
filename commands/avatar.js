@@ -47,7 +47,7 @@ module.exports = {
 
     message.client.user.setAvatar(content[1]).then(() => {
       message.reply('yaptım reis, gifse olmamıştır ama').then(() => {
-        message.delete();
+        interaction?.message.delete();
       });
 
       interaction?.message.delete();
