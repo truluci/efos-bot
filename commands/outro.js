@@ -27,7 +27,7 @@ module.exports = {
       adapterCreator: voiceChannel.guild.voiceAdapterCreator,
     });
 
-    const resource = DiscordVoice.createAudioResource(path.join(__dirname, '../../assets/outro.mp3'));
+    const resource = DiscordVoice.createAudioResource(path.join(__dirname, '../assets/outro.mp3'));
 
     const player = DiscordVoice.createAudioPlayer();
 
