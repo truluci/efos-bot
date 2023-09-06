@@ -7,7 +7,7 @@ module.exports = {
   detailedDescription: 'Plays outro for a specified user.\n\n`outro <@user>`\n\nUser must be in a voice channel for this command to work properly.',
   triggers: ['outro', 'çıkış'],
   execute(message) {
-    if (message.client.voice.connections.size) {
+    if (DiscordVoice.getVoiceConnection(message.guild.id)) {
       message.reply('İŞİM VAR BAŞKASINI ATIYOM DUR BİRAZ');
       return;
     };
@@ -52,7 +52,8 @@ module.exports = {
 
     setTimeout(() => {
       player.stop();
-      connection.destroy();
+      if (connection.state.status != DiscordVoice.VoiceConnectionStatus.Destroyed)
+        connection.destroy();
     }, 20000);
   }
 };
