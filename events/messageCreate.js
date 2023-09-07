@@ -1,6 +1,7 @@
 const avatar = require('../commands/avatar');
 const help = require('../commands/help');
 const keyword = require('../commands/keyword');
+const meme = require('../commands/meme');
 const outro = require('../commands/outro');
 const translate = require('../commands/translate');
 const weather = require('../commands/weather');
@@ -22,5 +23,7 @@ module.exports = message => {
     avatar.execute(message);
   } else if (help.triggers.includes(command)) {
     help.execute(message);
-  };
+  } else if (meme.triggers.includes(command)) {
+    meme.execute(message);
+  }
 };

@@ -8,6 +8,8 @@ const interactionCreate = require('./events/interactionCreate');
 const messageCreate = require('./events/messageCreate');
 const ready = require('./events/ready');
 const voiceStateUpdate = require('./events/voiceStateUpdate');
+const messageReactionAdd = require('./events/messageReactionAdd');
+const messageReactionRemove = require('./events/messageReactionRemove');
 
 const client = new Discord.Client({
   intents: [
@@ -29,11 +31,17 @@ const client = new Discord.Client({
   ]
 });
 
+// client.on('dmChannelCreate', dmChannelCreate);
+
 client.on('guildMemberAdd', guildMemberAdd);
 
 client.on('interactionCreate', interactionCreate);
 
 client.on('messageCreate', messageCreate);
+
+client.on('messageReactionAdd', messageReactionAdd);
+
+client.on('messageReactionRemove', messageReactionRemove);
 
 client.on('ready', ready);
 
