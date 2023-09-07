@@ -19,7 +19,7 @@ module.exports = {
         const duration = new Date(Date.now() - joinTime);
 
         channel.send({
-          content: `${DURATIONS[member.id]?.channel.name} kanalında ${duration.getUTCHours()} saat ${duration.getUTCMinutes()} dakika ${duration.getUTCSeconds()} saniye kadar kalan **${member.nickname}** arkadaşımızı tebrik ediyoruz.`,
+          content: `${DURATIONS[member.id]?.channel.name} kanalında ${duration.getUTCHours()} saat ${duration.getUTCMinutes()} dakika ${duration.getUTCSeconds()} saniye kadar kalan **${member.nickname || member.user.username}** arkadaşımızı tebrik ediyoruz.`,
           flags: [4096] // Silent message
         })
           .then(() => {
