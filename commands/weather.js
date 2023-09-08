@@ -99,7 +99,11 @@ module.exports = {
         const temperature = data.main.temp;
         const weatherDescription = data.weather[0].description;
 
-        interaction.channel.send(`${selectedValue} için hava ${Math.floor(temperature)}°C ve ${weatherDescription}`);
+        if (lang == 'en')
+          interaction.channel.send(`Weather for ${selectedValue} is ${Math.floor(temperature)}°C and ${weatherDescription}`);
+        else
+          interaction.channel.send(`${selectedValue} için hava ${Math.floor(temperature)}°C ve ${weatherDescription}`);
+
         interaction.deferUpdate();
       })
       .catch(error => {
