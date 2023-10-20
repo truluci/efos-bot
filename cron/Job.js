@@ -5,7 +5,7 @@ const hasNewVideo = require('./functions/hasNewVideo');
 const writeVideosToFile = require('./functions/writeVideosToFile');
 const sendTelegramMessage = require('./functions/sendTelegramMessage');
 
-const Job = cron.schedule('* * * * *', () => {
+const Job = cron.schedule('0 * * * *', () => {
   getVideos((err, videos) => {
     if (err) return console.log(err);
 
