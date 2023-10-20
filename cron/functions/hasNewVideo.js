@@ -5,6 +5,11 @@ module.exports = (videos, callback) => {
   fs.readFile(path.join(__dirname, `../data/playlist.txt`), 'utf8', (err, data) => {
     if (err) return callback(err);
 
-    callback(null, (data != videos) && data.length < videos.length);
+    let newVideos = null;
+    if (data.length < videos.length) {
+      newVideos = videos.split(',').filter(video => !data.includes(video));
+    };
+
+    callback(null, newVideos);
   });
 };

@@ -15,7 +15,6 @@ module.exports = callback => {
   }).then(res => {
     if (!res.data.items) return callback('No videos found.');
 
-    console.log(res.data.items);
     const videos = res.data.items
       .map(item => item.contentDetails.videoId)
       .sort((a, b) => a - b)

@@ -12,7 +12,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
     "@discordjs/voice": "^0.16.0",
-    "discord.js": "^14.13.0",
+    "discord.js": "^14.12.1",
     "dotenv": "^16.3.1",
     "ffmpeg-static": "^5.2.0",
     "google-translate-api-x": "^10.6.7",
@@ -20,7 +20,6 @@
     "libsodium-wrappers": "^0.7.11",
     "node-cron": "^3.0.2",
     "node-fetch": "^2.6.9",
-    "node-telegram-bot-api": "^0.63.0",
     "valid-url": "^1.0.9"
   }
 }
