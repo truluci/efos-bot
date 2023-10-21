@@ -5,6 +5,8 @@ const Job = require('./cron/Job');
 
 dotenv.config();
 
+Job.start();
+
 const guildMemberAdd = require('./events/guildMemberAdd');
 const interactionCreate = require('./events/interactionCreate');
 const messageCreate = require('./events/messageCreate');
@@ -42,9 +44,5 @@ client.on('ready', ready);
 client.on('voiceStateUpdate', voiceStateUpdate);
 
 client.login(process.env.TOKEN)
-
-Job.start(() => {
-  console.log(`Cron Jobs are started.`);
-});
 
 module.exports = client;
