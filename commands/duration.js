@@ -1,3 +1,5 @@
+const { MessageFlags } = require('discord.js');
+
 const DURATIONS = {};
 
 module.exports = {
@@ -20,7 +22,7 @@ module.exports = {
 
         channel.send({
           content: `${DURATIONS[member.id]?.channel.name} kanalında ${duration.getUTCHours()} saat ${duration.getUTCMinutes()} dakika ${duration.getUTCSeconds()} saniye kadar kalan **${member.nickname || member.user.username}** arkadaşımızı tebrik ediyoruz.`,
-          flags: [4096] // Silent message
+          flags: [MessageFlags.SuppressNotifications],
         })
           .then(() => {
             delete DURATIONS[member.id];
