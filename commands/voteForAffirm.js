@@ -22,16 +22,16 @@ module.exports = {
       }
   
       const embed = {
-        color: '#3498db',
+        color: 0x3498db, // Use the decimal representation of the color
         author: {
           name: message.author.username,
           icon_url: message.author.displayAvatarURL({ dynamic: true }),
         },
         description: sentence,
         footer: {
-          text: 'React with 👍 to vote for this sentence.',
+          text: 'React with 👍 to vote for this affirmation.',
         },
-      };
+      };      
   
       message.channel.send({ embeds: [embed] })
         .then((sentMessage) => {
