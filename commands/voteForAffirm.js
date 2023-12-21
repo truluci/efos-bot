@@ -11,7 +11,7 @@ module.exports = {
       en: 'Start a vote for a specific sentence. Use `vote <your sentence>` to initiate the vote.',
       tr: 'Belirli bir cümle için oylama başlatır. Oylama başlatmak için `oylama <cümleniz>` komutunu kullanın.'
     },
-    triggers: ['vote', 'oylama'],
+    triggers: ['vote', 'oyla'],
     voteThreshold: 3, // Voting threshold
     execute(message) {
       const sentence = message.content.slice(this.triggers[0].length + 1).trim();
@@ -38,12 +38,12 @@ module.exports = {
           sentMessage.react('👍');
   
           const filter = (reaction, user) => reaction.emoji.name === '👍' && !user.bot;
-          const collector = sentMessage.createReactionCollector({ filter, time: 60000 });
+          const collector = sentMessage.createReactionCollector({ filter, time: 10000 });
   
           collector.on('end', (collected) => {
             if (collected.size >= this.voteThreshold) {
               message.channel.send(`The sentence "${sentence}" has been selected with ${collected.size} votes!`);
-              // Add further actions or logic for the selected sentence here
+              // Seçildikten sonra ne yapılacağı buraya yazılacak amk necibi :D
             } else {
               message.channel.send(`The sentence "${sentence}" did not receive enough votes.`);
             }

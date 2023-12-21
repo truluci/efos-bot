@@ -8,10 +8,15 @@ const voteForAffirm = require('../commands/voteForAffirm');
 
 const commandMap = {
   [outro.triggers[0]]: outro,
+  [outro.triggers[1]]: outro,
   [weather.triggers[0]]: weather,
+  [weather.triggers[1]]: weather,
   [avatar.triggers[0]]: avatar,
+  [avatar.triggers[1]]: avatar,
   [help.triggers[0]]: help,
-  [voteForAffirm.triggers[0]]: voteForAffirm
+  [help.triggers[1]]: help,
+  [voteForAffirm.triggers[0]]: voteForAffirm,
+  [voteForAffirm.triggers[1]]: voteForAffirm
 };
 
 module.exports = message => {
