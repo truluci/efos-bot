@@ -1,5 +1,4 @@
 module.exports = {
-  cronSchedule: '* * * * *', // every minute
   avatar: {
     info: {
       name: {

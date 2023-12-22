@@ -1,11 +1,7 @@
 const Discord = require('discord.js');
 const dotenv = require('dotenv');
 
-const Job = require('./cron/Job');
-
 dotenv.config();
-
-Job.start();
 
 const guildMemberAdd = require('./events/guildMemberAdd');
 const interactionCreate = require('./events/interactionCreate');

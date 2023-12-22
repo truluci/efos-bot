@@ -1,5 +1,4 @@
 node_modules
 .env
-cron/data/*
 .DS_Store
 config.js
