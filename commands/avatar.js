@@ -5,7 +5,7 @@ const createButtonMenu = require('../utils/createButtonMenu');
 const isAdmin = require('../utils/isAdmin');
 const rejectInteraction = require('../utils/rejectInteraction');
 
-RESPONSES = {
+const RESPONSES = {
   confirm: {
     en: 'Avatar changed successfully. (if it\'s a gif, it might not work)',
     tr: 'yaptım reis, gifse olmamıştır ama'

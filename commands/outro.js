@@ -1,7 +1,7 @@
 const DiscordVoice = require('@discordjs/voice');
 const path = require('path');
 
-RESPONSES = {
+const RESPONSES = {
   already_playing: {
     en: 'I\'m already playing outro for someone else.',
     tr: 'İŞİM VAR BAŞKASINI ATIYOM DUR BİRAZ'

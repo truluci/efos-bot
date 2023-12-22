@@ -1,5 +1,4 @@
 const fs = require('fs');
-const Discord = require('discord.js');
 
 const RESPONSES = {
   command_not_found_title: {
@@ -11,6 +10,7 @@ const RESPONSES = {
     tr: 'Komut bulunamadı. Tüm komutları görmek için `yardım` kullanın.'
   }
 };
+
 module.exports = {
   name: {
     en: 'Help',
@@ -25,9 +25,11 @@ module.exports = {
     const content = message.content.toLowerCase().split(' ');
     const lang = content[0] == this.triggers[0] ? 'en' : 'tr';
 
-    const embed = new Discord.EmbedBuilder()
-      .setTitle(this.name[lang])
-      .setDescription(this.description[lang])
+    const embed = {
+      title: this.name[lang],
+      description: this.description[lang],
+      fields: []
+    }
     
     const commands = [];
     
@@ -40,7 +42,7 @@ module.exports = {
 
     if (!content[1]) {
       commands.forEach(command => {
-        embed.addFields({
+        embed.fields.push({
           name: command.name[lang],
           value: command.description[lang]
         });
@@ -49,11 +51,11 @@ module.exports = {
       const command = commands.find(command => command.triggers.includes(content[1]));
 
       if (command) {
-        embed.setTitle(command.name[lang]);
-        embed.setDescription(command.detailedDescription[lang] || command.description[lang]);
+        embed.title = command.name[lang];
+        embed.description = command.detailedDescription[lang] || command.description[lang];
       } else {
-        embed.setTitle(RESPONSES.command_not_found_title[lang]);
-        embed.setDescription(RESPONSES.command_not_found[lang]);
+        embed.title = RESPONSES.command_not_found_title[lang];
+        embed.description = RESPONSES.command_not_found[lang];
       };
     };
 

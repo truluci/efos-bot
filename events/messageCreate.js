@@ -4,20 +4,22 @@ const keyword = require('../commands/keyword');
 const outro = require('../commands/outro');
 const translate = require('../commands/translate');
 const weather = require('../commands/weather');
-const voteForAffirm = require('../commands/voteForAffirm');
+const vote = require('../commands/vote');
 
-const commandMap = {
-  [outro.triggers[0]]: outro,
-  [outro.triggers[1]]: outro,
-  [weather.triggers[0]]: weather,
-  [weather.triggers[1]]: weather,
-  [avatar.triggers[0]]: avatar,
-  [avatar.triggers[1]]: avatar,
-  [help.triggers[0]]: help,
-  [help.triggers[1]]: help,
-  [voteForAffirm.triggers[0]]: voteForAffirm,
-  [voteForAffirm.triggers[1]]: voteForAffirm
-};
+const commands = [
+  outro,
+  weather,
+  avatar,
+  help,
+  vote
+];
+const commandMap = {};
+
+commands.forEach(command => {
+  command.triggers.forEach(trigger => {
+    commandMap[trigger] = command;
+  });
+});
 
 module.exports = message => {
   if (!message.guild || message.author.bot) return;
