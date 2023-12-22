@@ -29,8 +29,5 @@ module.exports = message => {
   keyword.execute(message);
   translate.execute(message);
 
-  const commandToExecute = commandMap[command];
-  if (commandToExecute) {
-    commandToExecute.execute(message);
-  }
+  commandMap[command]?.execute(message);
 };

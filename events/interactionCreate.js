@@ -5,9 +5,9 @@ module.exports = interaction => {
   if (!interaction.isStringSelectMenu() && !interaction.isButton())
     return;
 
-  if (weather.triggers.includes(interaction.customId)) {
+  if (interaction.customId.includes('weather')) {
     weather.getAndSendWeather(interaction);
-  } else if (interaction.customId == 'confirm-set-avatar' || interaction.customId == 'reject-set-avatar') {
+  } else if (interaction.customId.includes('confirm-set-avatar') || interaction.customId.includes('reject-set-avatar')) {
     avatar.handleInteraction(interaction);
   };
 };

@@ -1,15 +1,10 @@
-const KEYWORD_RESPONSES = {
-  'ping': 'pong',
-  'zort': 'zarrrrt',
-  'selam': 'selamın aleyküm diceksin',
-  'sa': 'as',
-};
+const { keyword } = require("../config");
 
 module.exports = {
   execute(message) {
     const content = message.content.toLowerCase();
 
-    if (content in KEYWORD_RESPONSES)
-      message.reply(KEYWORD_RESPONSES[content]);
+    if (content in keyword.responses)
+      message.reply(keyword.responses[content]);
   }
 };

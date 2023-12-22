@@ -1,26 +1,12 @@
 const fs = require('fs');
 
-const RESPONSES = {
-  command_not_found_title: {
-    en: 'Error',
-    tr: 'Hata'
-  },
-  command_not_found: {
-    en: 'Command not found. Please use `help` to see all commands.',
-    tr: 'Komut bulunamadı. Tüm komutları görmek için `yardım` kullanın.'
-  }
-};
+const { help } = require('../config');
 
 module.exports = {
-  name: {
-    en: 'Help',
-    tr: 'Yardım'
-  },
-  description: {
-    en: 'You can get detailed info about a command by using `help <command>`.',
-    tr: 'Bir komut hakkında detaylı bilgi almak için `yardım <komut>` kullanabilirsiniz.'
-  },
-  triggers: ['help', 'yardım'],
+  name: help.info.name,
+  description: help.info.description,
+  detailedDescription: help.info.detailedDescription,
+  triggers: help.info.triggers,
   execute(message) {
     const content = message.content.toLowerCase().split(' ');
     const lang = content[0] == this.triggers[0] ? 'en' : 'tr';
@@ -54,8 +40,8 @@ module.exports = {
         embed.title = command.name[lang];
         embed.description = command.detailedDescription[lang] || command.description[lang];
       } else {
-        embed.title = RESPONSES.command_not_found_title[lang];
-        embed.description = RESPONSES.command_not_found[lang];
+        embed.title = help.responses.command_not_found_title[lang];
+        embed.description = help.responses.command_not_found[lang];
       };
     };
 

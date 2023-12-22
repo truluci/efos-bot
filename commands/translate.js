@@ -1,17 +1,16 @@
 const { MessageFlags } = require('discord.js');
 
-const translate = require('google-translate-api-x');
+const { translate } = require('../config');
+const googleTranslate = require('google-translate-api-x');
 const validUrl = require('valid-url');
-
-const CHANNELS_TO_TRANSLATE = process.env.CHANNELS_TO_TRANSLATE.split(',');
 
 module.exports = {
   execute(message) {
-    if (!CHANNELS_TO_TRANSLATE.includes(message.channel.id)) return;
+    if (!translate.channels.includes(message.channel.id)) return;
     if (validUrl.isUri(message.content)) return;
     if (!message.content.length) return;
 
-    translate(message.content, { from: 'tr', to: 'en' }).then(res => {
+    googleTranslate(message.content, { from: 'tr', to: 'en' }).then(res => {
       const embed = {
         author: {
           name: message.member.nickname || message.author.username,
@@ -37,7 +36,7 @@ module.exports = {
     }).catch(err => {
       console.error(err);
       message.channel.send({
-        content: `bi sıkıntı çıktı kanzi: ${err}`,
+        content: err,
         flags: [MessageFlags.SuppressNotifications]
       });
     });

@@ -1,13 +1,17 @@
 const isAdmin = require('../utils/isAdmin');
 
-module.exports = interaction => {
-  if (isAdmin(interaction.member)) {
-    interaction.message.channel.messages.cache.get(interaction.message.reference.messageId)
-      .reply('emir yüksek yerlerden geldi, yapamam');
-    interaction.message.delete();
+const { interaction } = require('../config');
+
+module.exports = interact => {
+  const lang = interact.customId.split('-').pop();
+
+  if (isAdmin(interact.member)) {
+    interact.message.channel.messages.cache.get(interact.message.reference.messageId)
+      .reply(interaction.responses.reject_interaction[lang]);
+    interact.message.delete();
   } else {
-    interaction.reply({
-      content: 'admin değilsin böhöhöyt',
+    interact.reply({
+      content: interaction.responses.not_admin[lang],
       ephemeral: true
     });
   };

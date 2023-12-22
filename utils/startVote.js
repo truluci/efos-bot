@@ -14,6 +14,9 @@ module.exports = (message, data) => {
     embeds: [],
   };
 
+  if (data.tag)
+    message.channel.send(`<@&${data.tag}>`);
+  
   message.channel.send({ embeds: [embed] })
     .then((sentMessage) => {
       const positiveReaction = data.reactions?.positive || '👍';
@@ -30,8 +33,6 @@ module.exports = (message, data) => {
       collector.on('end', collected => {
         const positiveVotesCount = collected.get(positiveReaction).count;
         const negativeVotesCount = collected.get(negativeReaction).count;
-
-        console.log(positiveVotesCount, negativeVotesCount);
 
         const minVotes = data.minVotes || DEFAULT_MIN_VOTES;
 

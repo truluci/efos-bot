@@ -1,5 +1,7 @@
 const { MessageFlags } = require('discord.js');
 
+const { duration } = require('../config');
+
 const DURATIONS = {};
 
 module.exports = {
@@ -21,7 +23,12 @@ module.exports = {
         const duration = new Date(Date.now() - joinTime);
 
         channel.send({
-          content: `${DURATIONS[member.id]?.channel.name} kanalında ${duration.getUTCHours()} saat ${duration.getUTCMinutes()} dakika ${duration.getUTCSeconds()} saniye kadar kalan **${member.nickname || member.user.username}** arkadaşımızı tebrik ediyoruz.`,
+          content: duration.message
+            .replace('{channel}', DURATIONS[member.id]?.channel.name)
+            .replace('{hours}', duration.getUTCHours())
+            .replace('{mins}', duration.getUTCMinutes())
+            .replace('{secs}', duration.getUTCSeconds())
+            .replace('{name}', member.nickname || member.user.username),
           flags: [MessageFlags.SuppressNotifications],
         })
           .then(() => {
