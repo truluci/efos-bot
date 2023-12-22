@@ -43,6 +43,14 @@ module.exports = {
       admin_approval_reject: {
         en: 'No.',
         tr: 'Hayır.'
+      },
+      reject_interaction: {
+        en: 'Admins rejected your request.',
+        tr: 'Adminler isteğinizi reddetti.'
+      },
+      not_admin: {
+        en: 'You are not an admin.',
+        tr: 'Admin değilsiniz.'
       }
     }
   },
@@ -199,18 +207,6 @@ module.exports = {
     message: {
       en: 'Weather for {city} is {temperature}°C and {weatherDescription}',
       tr: '{city} için hava {temperature}°C ve {weatherDescription}'
-    }
-  },
-  interaction: {
-    responses: {
-      reject_interaction: {
-        en: 'Admins rejected your request.',
-        tr: 'Adminler isteğinizi reddetti.'
-      },
-      not_admin: {
-        en: 'You are not an admin.',
-        tr: 'Admin değilsiniz.'
-      }
     }
   },
 };

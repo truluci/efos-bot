@@ -4,7 +4,6 @@ const validUrl = require('valid-url');
 const { avatar } = require('../config');
 const createButtonMenu = require('../utils/createButtonMenu');
 const isAdmin = require('../utils/isAdmin');
-const rejectInteraction = require('../utils/rejectInteraction');
 
 module.exports = {
   name: avatar.info.name,
@@ -67,6 +66,20 @@ module.exports = {
     if (interaction.customId.includes('confirm-set-avatar') && isAdmin(interaction.member))
       this.setAvatar(interaction.message.channel.messages.cache.get(interaction.message.reference.messageId), interaction);
     else
-      rejectInteraction(interaction);
+      this.rejectInteraction(interaction);
+  },
+  rejectInteraction(interaction) {
+    const lang = interaction.customId.split('-').pop();
+
+    if (isAdmin(interaction.member)) {
+      interaction.message.channel.messages.cache.get(interaction.message.reference.messageId)
+        .reply(avatar.responses.reject_interaction[lang]);
+      interaction.message.delete();
+    } else {
+      interaction.reply({
+        content: avatar.responses.not_admin[lang],
+        ephemeral: true
+      });
+    };
   }
 };
