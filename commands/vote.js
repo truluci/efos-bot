@@ -16,7 +16,7 @@ module.exports = {
       return;
     };
 
-    const affirmation = message.content.slice(this.triggers[0].length + 1).trim().toLocaleUpperCase('tr');
+    const affirmation = message.content.slice(this.triggers[0].length + 1).trim().toLocaleUpperCase('tr'); // TODO: Dynamic language support
 
     startVote(message, {
       description: affirmation,
