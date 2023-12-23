@@ -16,8 +16,8 @@ module.exports = {
       return;
     };
 
-    const affirmation = message.content.slice(this.triggers[0].length + 1).trim().toUpperCase();
-
+    const affirmation = message.content.slice(this.triggers[0].length + 1).trim().toLocaleUpperCase('tr');
+    
     startVote(message, {
       description: affirmation,
       reactions: {
