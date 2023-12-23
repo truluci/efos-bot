@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
+const { PermissionFlagsBits } = require('discord.js');
 
 module.exports = member => {
-  return member && member.permissions.has(Discord.PermissionFlagsBits.Administrator);
+  return member && member.permissions.has(PermissionFlagsBits.Administrator);
 };

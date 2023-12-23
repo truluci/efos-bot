@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
 
 module.exports = (data, callback) => {
   if (!data.channel)
@@ -10,9 +10,9 @@ module.exports = (data, callback) => {
   if (!data.customId)
     return callback(null, 'No custom ID provided for message.');
 
-  const row = new Discord.ActionRowBuilder()
+  const row = new ActionRowBuilder()
     .addComponents(
-      new Discord.StringSelectMenuBuilder()
+      new StringSelectMenuBuilder()
         .setCustomId(data.customId)
         .addOptions(data.options)
   );

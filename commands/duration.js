@@ -20,14 +20,14 @@ module.exports = {
 
       if (joinTime) {
         const channel = oldState.channel;
-        const duration = new Date(Date.now() - joinTime);
+        const durationTime = new Date(Date.now() - joinTime);
 
         channel.send({
           content: duration.message
             .replace('{channel}', DURATIONS[member.id]?.channel.name)
-            .replace('{hours}', duration.getUTCHours())
-            .replace('{mins}', duration.getUTCMinutes())
-            .replace('{secs}', duration.getUTCSeconds())
+            .replace('{hours}', durationTime.getUTCHours())
+            .replace('{mins}', durationTime.getUTCMinutes())
+            .replace('{secs}', durationTime.getUTCSeconds())
             .replace('{name}', member.nickname || member.user.username),
           flags: [MessageFlags.SuppressNotifications],
         })

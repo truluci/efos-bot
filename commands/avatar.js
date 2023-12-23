@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { ButtonStyle } = require('discord.js');
 const validUrl = require('valid-url');
 
 const { avatar } = require('../config');
@@ -23,12 +23,12 @@ module.exports = {
         options: [
           {
             label: avatar.responses.admin_approval_confirm[lang],
-            style: Discord.ButtonStyle.Success,
+            style: ButtonStyle.Success,
             customId: `confirm-set-avatar-${lang}`
           },
           {
             label: avatar.responses.admin_approval_reject[lang],
-            style: Discord.ButtonStyle.Danger,
+            style: ButtonStyle.Danger,
             customId: `reject-set-avatar-${lang}`
           }
         ],

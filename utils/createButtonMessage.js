@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = (data, callback) => {
   if (!data.channel)
@@ -7,12 +7,12 @@ module.exports = (data, callback) => {
   if (!data.options)
     return callback(null, 'No options provided for message.');
 
-  const row = new Discord.ActionRowBuilder();
+  const row = new ActionRowBuilder();
 
   data.options.forEach(option => {
-    const button = new Discord.ButtonBuilder()
+    const button = new ButtonBuilder()
 
-    button.setStyle(option.style || (option.url ? Discord.ButtonStyle.Link : Discord.ButtonStyle.Success));
+    button.setStyle(option.style || (option.url ? ButtonStyle.Link : ButtonStyle.Success));
     button.setLabel(option.label || 'Button');
 
     if (!option.url && !option.customId)
