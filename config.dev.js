@@ -1,4 +1,7 @@
 module.exports = {
+  activity: {
+    name: 'Hello World!'
+  },
   avatar: {
     info: {
       name: {
