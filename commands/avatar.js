@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const validUrl = require('valid-url');
 
 const { avatar } = require('../config');
-const createButtonMenu = require('../utils/createButtonMenu');
+const createButtonMessage = require('../utils/createButtonMessage');
 const isAdmin = require('../utils/isAdmin');
 
 module.exports = {
@@ -16,7 +16,9 @@ module.exports = {
     if (isAdmin(message.member))
       this.setAvatar(message);
     else
-      createButtonMenu(message, {
+      createButtonMessage({
+        replyTo: message,
+        channel: message.channel,
         content: avatar.responses.ask_admin_approval[lang],
         options: [
           {
@@ -29,7 +31,9 @@ module.exports = {
             style: Discord.ButtonStyle.Danger,
             customId: `reject-set-avatar-${lang}`
           }
-        ]
+        ],
+      }, (createdMessage, err) => {
+        if (err) return console.error(err);
       });
   },
   setAvatar(message, interaction) {

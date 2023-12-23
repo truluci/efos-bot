@@ -1,4 +1,5 @@
 const { vote } = require("../config");
+const createButtonMessage = require("../utils/createButtonMessage");
 const startVote = require("../utils/startVote");
 
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;
@@ -27,24 +28,47 @@ module.exports = {
       minVotes: 2,
       time: ONE_HOUR_IN_MS,
       tag: vote.tag,
-      onVotePassed(sentMessage) {
-        const embed = sentMessage.embeds[0];
+      onVotePassed(voteMessage) {
+        const embed = voteMessage.embeds[0];
         embed.data.footer = { text: vote.responses.vote_passed[lang] };
 
-        sentMessage.edit({ embeds: [embed] });
+        voteMessage.edit({ embeds: [embed] });
 
-        message.channel
-          .send(`[${affirmation}](https://twitter.com/intent/tweet?text=${encodeURIComponent(affirmation)})`)
-          .then(twitterUrlMessage => twitterUrlMessage.pin());
+        createButtonMessage({
+          channel: message.channel,
+          content: affirmation,
+          options: [
+            {
+              label: 'Publish',
+              url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(affirmation)}`,
+            },
+            {
+              label: 'Unpin',
+              customId: 'unpin-affirmation',
+            }
+          ]
+        }, (createdMessage, err) => {
+          if (err) return console.error(err);
+
+          createdMessage.pin();
+        });
       },
-      onVoteFailed(sentMessage) {
-        const embed = sentMessage.embeds[0];
+      onVoteFailed(voteMessage) {
+        const embed = voteMessage.embeds[0];
         embed.data.footer = {
           text: vote.responses.vote_failed[lang]
         };
 
-        sentMessage.edit({ embeds: [embed] });
+        voteMessage.edit({ embeds: [embed] });
       }
     });
+  },
+  handleInteraction(interaction) {
+    interaction.message.unpin();
+    interaction.message.edit({
+      content: `${interaction.message.content} **(unpinned)**`,
+      components: [],
+    });
+    interaction.deferUpdate();
   },
 };

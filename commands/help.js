@@ -15,7 +15,7 @@ module.exports = {
       title: this.name[lang],
       description: this.description[lang],
       fields: []
-    }
+    };
     
     const commands = [];
     

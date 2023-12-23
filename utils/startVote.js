@@ -18,14 +18,14 @@ module.exports = (message, data) => {
     message.channel.send(`<@&${data.tag}>`);
   
   message.channel.send({ embeds: [embed] })
-    .then((sentMessage) => {
+    .then((voteMessage) => {
       const positiveReaction = data.reactions?.positive || '👍';
       const negativeReaction = data.reactions?.negative || '👎';
 
-      sentMessage.react(positiveReaction);
-      sentMessage.react(negativeReaction);
+      voteMessage.react(positiveReaction);
+      voteMessage.react(negativeReaction);
 
-      const collector = sentMessage.createReactionCollector({
+      const collector = voteMessage.createReactionCollector({
         filter: reaction => [positiveReaction, negativeReaction].includes(reaction.emoji.name),
         time: data.time || DEFAULT_TIME
       });
@@ -37,9 +37,9 @@ module.exports = (message, data) => {
         const minVotes = data.minVotes || DEFAULT_MIN_VOTES;
 
         if (positiveVotesCount - negativeVotesCount >= minVotes) {
-          data.onVotePassed(sentMessage);
+          data.onVotePassed(voteMessage);
         } else {
-          data.onVoteFailed(sentMessage);
+          data.onVoteFailed(voteMessage);
         }
       });
     });
