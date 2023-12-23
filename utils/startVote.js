@@ -26,7 +26,7 @@ module.exports = (message, data) => {
       sentMessage.react(negativeReaction);
 
       const collector = sentMessage.createReactionCollector({
-        filter: (reaction, user) => [positiveReaction, negativeReaction].includes(reaction.emoji.name),
+        filter: reaction => [positiveReaction, negativeReaction].includes(reaction.emoji.name),
         time: data.time || DEFAULT_TIME
       });
 
