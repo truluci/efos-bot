@@ -39,7 +39,9 @@ module.exports = {
       },
       onVoteFailed(sentMessage) {
         const embed = sentMessage.embeds[0];
-        embed.data.footer = { text: vote.responses.vote_failed[lang] };
+        embed.data.footer = {
+          text: vote.responses.vote_failed[lang]
+        };
 
         sentMessage.edit({ embeds: [embed] });
       }
