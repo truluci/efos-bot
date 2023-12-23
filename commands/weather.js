@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 const { weather } = require('../config');
-const createDropdownMenu = require('../utils/createDropdownMenu');
+const createDropdownMessage = require('../utils/createDropdownMessage');
 
 module.exports = {
   name: weather.info.name,
@@ -11,10 +11,14 @@ module.exports = {
   execute(message) {
     const lang = message.content.toLowerCase().split(' ')[0] == this.triggers[0] ? 'en' : 'tr';
 
-    createDropdownMenu(message, {
+    createDropdownMessage({
+      channel: message.channel,
+      replyTo: message,
       content: weather.responses.ask_city[lang],
       customId: `weather-${lang}`,
       options: weather.cities[lang]
+    }, (createdMessage, err) => {
+      if (err) return console.error(err);
     });
   },
   getAndSendWeather(interaction) {
