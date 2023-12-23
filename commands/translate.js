@@ -10,7 +10,10 @@ module.exports = {
     if (validUrl.isUri(message.content)) return;
     if (!message.content.length) return;
 
-    googleTranslate(message.content, { from: 'tr', to: 'en' }).then(res => {
+    googleTranslate(message.content, {
+      from: translate.language.from,
+      to: translate.language.to,
+    }).then(res => {
       const embed = {
         author: {
           name: message.member.nickname || message.author.username,
@@ -24,7 +27,7 @@ module.exports = {
 
         if (repliedMessage) {
           embed.footer = {
-            text: `Replying to ${repliedMessage.member.nickname || repliedMessage.author.username}`,
+            text: translate.responses.replying_to[translate.language.from].replace('{user}', repliedMessage.member.nickname || repliedMessage.author.username),
           };
         };
       };

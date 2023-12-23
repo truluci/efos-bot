@@ -128,9 +128,19 @@ module.exports = {
     }
   },
   translate: {
+    language: {
+      from: 'tr',
+      to: 'en',
+    },
     channels: [
       '0000000000000000000', // channel-id
     ],
+    responses: {
+      replying_to: {
+        en: 'Replying to {user}',
+        tr: '{user}\'a yanıt olarak'
+      },
+    },
   },
   vote: {
     info: {
