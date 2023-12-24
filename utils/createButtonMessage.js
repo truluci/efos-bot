@@ -1,7 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = (data, callback) => {
-  if (!data.channel)
+  if (!data.triggerMessage)
     return callback(null, 'No channel provided for message.');
 
   if (!data.options)
@@ -26,11 +26,11 @@ module.exports = (data, callback) => {
     row.addComponents(button);
   });
 
-  data.channel.send({
+  data.triggerMessage.channel.send({
     content: data.content,
     components: [row],
     reply: {
-      messageReference: data.replyTo,
+      messageReference: data.reply ? data.triggerMessage : undefined,
       failIfNotExists: false
     }
   }).then(createdMessage => {

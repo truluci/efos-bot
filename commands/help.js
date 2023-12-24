@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { EmbedBuilder } = require('discord.js');
 
 const { help } = require('../config');
 
@@ -11,11 +12,9 @@ module.exports = {
     const content = message.content.toLowerCase().split(' ');
     const lang = content[0] == this.triggers[0] ? 'en' : 'tr';
 
-    const embed = {
-      title: this.name[lang],
-      description: this.description[lang],
-      fields: []
-    };
+    const embed = new EmbedBuilder();
+    embed.setTitle(this.name[lang]);
+    embed.setDescription(this.description[lang]);
     
     const commands = [];
     
@@ -27,21 +26,19 @@ module.exports = {
     });
 
     if (!content[1]) {
-      commands.forEach(command => {
-        embed.fields.push({
-          name: command.name[lang],
-          value: command.description[lang]
-        });
-      });
+      embed.setFields(commands.map(command => ({
+        name: command.name[lang],
+        value: command.description[lang]
+      })));
     } else {
       const command = commands.find(command => command.triggers.includes(content[1]));
 
       if (command) {
-        embed.title = command.name[lang];
-        embed.description = command.detailedDescription[lang] || command.description[lang];
+        embed.setTitle(command.name[lang]);
+        embed.setDescription(command.detailedDescription[lang] || command.description[lang]);
       } else {
-        embed.title = help.responses.command_not_found_title[lang];
-        embed.description = help.responses.command_not_found[lang];
+        embed.setTitle(help.responses.command_not_found_title[lang]);
+        embed.setDescription(help.responses.command_not_found[lang]);
       };
     };
 

@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require("discord.js");
+
 const { vote } = require("../config");
 const createButtonMessage = require("../utils/createButtonMessage");
 const startVote = require("../utils/startVote");
@@ -19,23 +21,25 @@ module.exports = {
 
     const affirmation = message.content.slice(this.triggers[0].length + 1).trim().toLocaleUpperCase('tr'); // TODO: Dynamic language support
 
-    startVote(message, {
+    startVote({
+      triggerMessage: message,
       description: affirmation,
-      reactions: {
-        positive: '✅',
-        negative: '❌'
-      },
-      minVotes: 2,
-      time: ONE_HOUR_IN_MS,
-      tag: vote.tag,
-      onVotePassed(voteMessage) {
-        const embed = voteMessage.embeds[0];
-        embed.data.footer = { text: vote.responses.vote_passed[lang] };
+      // minVotes: 2,
+      // time: ONE_HOUR_IN_MS,
+      // tag: vote.tag,
+    }, (res, err) => {
+      if (err) return console.error(err);
 
-        voteMessage.edit({ embeds: [embed] });
+      const embed = new EmbedBuilder(res.message.embeds[0]);
+      embed.setFooter({
+        text: res.passed ? vote.responses.vote_passed[lang] : vote.responses.vote_failed[lang]
+      });
 
+      res.message.edit({ embeds: [embed] });
+
+      if (res.passed) {
         createButtonMessage({
-          channel: message.channel,
+          triggerMessage: message,
           content: affirmation,
           options: [
             {
@@ -45,22 +49,14 @@ module.exports = {
             {
               label: 'Unpin',
               customId: 'unpin-affirmation',
-            }
+            },
           ]
         }, (createdMessage, err) => {
           if (err) return console.error(err);
 
           createdMessage.pin();
         });
-      },
-      onVoteFailed(voteMessage) {
-        const embed = voteMessage.embeds[0];
-        embed.data.footer = {
-          text: vote.responses.vote_failed[lang]
-        };
-
-        voteMessage.edit({ embeds: [embed] });
-      }
+      };
     });
   },
   handleInteraction(interaction) {

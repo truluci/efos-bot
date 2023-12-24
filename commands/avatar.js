@@ -17,8 +17,8 @@ module.exports = {
       this.setAvatar(message);
     else
       createButtonMessage({
-        replyTo: message,
-        channel: message.channel,
+        triggerMessage: message,
+        reply: true,
         content: avatar.responses.ask_admin_approval[lang],
         options: [
           {

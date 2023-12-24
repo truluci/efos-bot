@@ -1,4 +1,4 @@
-const { MessageFlags } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 
 const { translate } = require('../config');
 const googleTranslate = require('google-translate-api-x');
@@ -14,21 +14,21 @@ module.exports = {
       from: translate.language.from,
       to: translate.language.to,
     }).then(res => {
-      const embed = {
-        author: {
-          name: message.member.nickname || message.author.username,
-          icon_url: message.author.displayAvatarURL({ dynamic: true }),
-        },
-        description: res.text,
-      };
+      const embed = new EmbedBuilder();
+
+      embed.setAuthor({
+        name: message.member.nickname || message.author.username,
+        iconURL: message.author.displayAvatarURL({ dynamic: true }),
+      });
+      embed.setDescription(res.text);
 
       if (message.reference) {
         const repliedMessage = message.channel.messages.cache.get(message.reference.messageId);
 
         if (repliedMessage) {
-          embed.footer = {
-            text: translate.responses.replying_to[translate.language.from].replace('{user}', repliedMessage.member.nickname || repliedMessage.author.username),
-          };
+          embed.setFooter({
+            text: translate.responses.replying_to[translate.language.to].replace('{user}', repliedMessage.member.nickname || repliedMessage.author.username)
+          });
         };
       };
 
