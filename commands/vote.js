@@ -24,9 +24,9 @@ module.exports = {
     createVoteMessage({
       triggerMessage: message,
       description: affirmation,
-      // minVotes: 2,
-      // time: ONE_HOUR_IN_MS,
-      // tag: vote.tag,
+      minVotes: 2,
+      time: ONE_HOUR_IN_MS,
+      tag: vote.tag,
     }, (err, res) => {
       if (err) return console.error(err);
 
