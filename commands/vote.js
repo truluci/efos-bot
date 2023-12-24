@@ -27,7 +27,7 @@ module.exports = {
       // minVotes: 2,
       // time: ONE_HOUR_IN_MS,
       // tag: vote.tag,
-    }, (res, err) => {
+    }, (err, res) => {
       if (err) return console.error(err);
 
       const embed = new EmbedBuilder(res.message.embeds[0]);
@@ -51,7 +51,7 @@ module.exports = {
               customId: 'unpin-affirmation',
             },
           ]
-        }, (createdMessage, err) => {
+        }, (err, createdMessage) => {
           if (err) return console.error(err);
 
           createdMessage.pin();

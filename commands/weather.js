@@ -12,12 +12,12 @@ module.exports = {
     const lang = message.content.toLowerCase().split(' ')[0] == this.triggers[0] ? 'en' : 'tr';
 
     createDropdownMessage({
-      channel: message.channel,
-      replyTo: message,
+      triggerMessage: message,
+      reply: true,
       content: weather.responses.ask_city[lang],
       customId: `weather-${lang}`,
       options: weather.cities[lang]
-    }, (createdMessage, err) => {
+    }, (err, createdMessage) => {
       if (err) return console.error(err);
     });
   },

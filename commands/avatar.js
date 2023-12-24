@@ -32,7 +32,7 @@ module.exports = {
             customId: `reject-set-avatar-${lang}`
           }
         ],
-      }, (createdMessage, err) => {
+      }, (err, createdMessage) => {
         if (err) return console.error(err);
       });
   },
