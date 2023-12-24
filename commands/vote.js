@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 
 const { vote } = require("../config");
 const createButtonMessage = require("../utils/createButtonMessage");
-const startVote = require("../utils/startVote");
+const createVoteMessage = require("../utils/createVoteMessage");
 
 const ONE_HOUR_IN_MS = 1000 * 60 * 60;
 
@@ -21,7 +21,7 @@ module.exports = {
 
     const affirmation = message.content.slice(this.triggers[0].length + 1).trim().toLocaleUpperCase('tr'); // TODO: Dynamic language support
 
-    startVote({
+    createVoteMessage({
       triggerMessage: message,
       description: affirmation,
       // minVotes: 2,
