@@ -222,4 +222,39 @@ module.exports = {
       tr: '{city} için hava {temperature}°C ve {weatherDescription}'
     }
   },
+  math: {
+    info: {
+      name: {
+        en: 'Math',
+        tr: 'Matematik'
+      },
+      description: {
+        en: 'Starts a math problem solve game.\n`math <@user>`',
+        tr: 'Matematik problem çözme oyunu başlatır.\n`matematik <@kullanıcı>`'
+      },
+      detailedDescription: {
+        en: 'Starts a math problem solve game.\n\n`math <@user>`\n\nYou need to solve the math problem as fast as you can.',
+        tr: 'Matematik problem çözme oyunu başlatır.\n\n`matematik <@kullanıcı>`\n\nMatematik problemi mümkün olduğunca hızlı bir şekilde çözmelisiniz.'
+      },
+      triggers: ['math', 'matematik'],
+    },
+    responses: {
+      mention_user: {
+        en: 'Please mention a user to challenge!',
+        tr: 'Bir kullanıcıyı meydan okumak için etiketleyin!'
+      },
+      cannot_participate: {
+        en: 'I cannot participate in math battles!',
+        tr: 'Ben matematik savaşlarına katılamam!'
+      },
+      cannot_challenge_self: {
+        en: 'You cannot challenge yourself!',
+        tr: 'Kendinize meydan okuyamazsınız!'
+      },
+      check_leaderboard: {
+        en: 'Check the leaderboard to see the results!',
+        tr: 'Sonuçları görmek için lider tablosuna bakın!'
+      },
+    }
+  },
 };

@@ -5,13 +5,15 @@ const outro = require('../commands/outro');
 const translate = require('../commands/translate');
 const weather = require('../commands/weather');
 const vote = require('../commands/vote');
+const math = require('../commands/math');
 
 const commands = [
   outro,
   weather,
   avatar,
   help,
-  vote
+  vote,
+  math
 ];
 const commandMap = {};
 
