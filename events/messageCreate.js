@@ -6,6 +6,7 @@ const translate = require('../commands/translate');
 const weather = require('../commands/weather');
 const vote = require('../commands/vote');
 const math = require('../commands/math');
+const leaderboard = require('../commands/leaderboard');
 
 const commands = [
   outro,
@@ -13,7 +14,8 @@ const commands = [
   avatar,
   help,
   vote,
-  math
+  math,
+  leaderboard
 ];
 const commandMap = {};
 

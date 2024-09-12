@@ -257,4 +257,23 @@ module.exports = {
       },
     }
   },
+  leaderboard: {
+    info: {
+      name: {
+        en: 'Leaderboard',
+        tr: 'Lider Tablosu'
+      },
+      description: {
+        en: 'Shows the leaderboard of the games.',
+        tr: 'Oyunlar için lider tablosunu gösterir.'
+      },
+      triggers: ['leaderboard', 'lider-tablo'],
+    },
+    responses: {
+      no_data: {
+        en: 'There is no data to show.',
+        tr: 'Gösterilecek veri yok.'
+      }
+    }
+  },
 };
