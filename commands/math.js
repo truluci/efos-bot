@@ -10,6 +10,7 @@ module.exports = {
 
     execute(message) {
       const lang = message.content.toLowerCase().split(' ')[0] == this.triggers[0] ? 'en' : 'tr';
+      const users = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../leaderboard.json'), 'utf8'));
 
         if (!message.mentions.users.size) {
           message.reply(math.responses.mention_user[lang]);
@@ -116,7 +117,7 @@ module.exports = {
               message.channel.send(`${challenger.username} added to leaderboard with 1 point!`);
             } else {
               leaderboard[challenger.username] += 1;
-              message.channel.send(`${challenger.username} now has ${leaderboard[challenger.id]} points!`);
+              message.channel.send(`${challenger.username} now has ${leaderboard[challenger.username]} points!`);
             }
     
             if (!leaderboard[opponent.username]) {
@@ -124,7 +125,7 @@ module.exports = {
               message.channel.send(`${opponent.username} added to leaderboard with 1 point!`);
             } else {
               leaderboard[opponent.username] += 1;
-              message.channel.send(`${opponent.username} now has ${leaderboard[opponent.id]} points!`);
+              message.channel.send(`${opponent.username} now has ${leaderboard[opponent.username]} points!`);
             }
     
           } else if (challengerPoints > opponentPoints) {
@@ -135,7 +136,7 @@ module.exports = {
               message.channel.send(`${challenger.username} added to leaderboard with 2 points!`);
             } else {
               leaderboard[challenger.username] += 2;
-              message.channel.send(`${challenger.username} now has ${leaderboard[challenger.id]} points!`);
+              message.channel.send(`${challenger.username} now has ${leaderboard[challenger.username]} points!`);
             }
     
           } else {
@@ -146,7 +147,7 @@ module.exports = {
               message.channel.send(`${opponent.username} added to leaderboard with 2 points!`);
             } else {
               leaderboard[opponent.username] += 2;
-              message.channel.send(`${opponent.username} now has ${leaderboard[opponent.id]} points!`);
+              message.channel.send(`${opponent.username} now has ${leaderboard[opponent.username]} points!`);
             }
           }
     
