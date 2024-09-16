@@ -13,6 +13,8 @@ EFOS Bot is a versatile Discord bot designed to enhance the user experience on D
 - **Translation Utility**: Translates messages in specified channels.
 - **Voting System**: Facilitates voting within the server with admin-defined affirmations.
 - **Weather Command**: Provides weather information for specified cities.
+- **Math Command**: allows users to challenge each other to a timed math battle with random arithmetic questions.
+- **Leaderboard Command**: displays the top users ranked by points earned from various challenges.
 
 ## Dependencies
 
